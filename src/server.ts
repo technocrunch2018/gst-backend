@@ -19,7 +19,13 @@ import { reportsRouter } from './modules/reports/reports.router';
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: env.frontendUrl, credentials: true }));
+const allowedOrigins = [
+  env.frontendUrl,
+  'https://nrbsagrovision.in',
+  'http://nrbsagrovision.in',
+  'https://www.nrbsagrovision.in',
+].filter(Boolean);
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json());
 
